@@ -11,30 +11,31 @@ public class Solution {
         if (head == null)
             return null;
         
-        ListNode node = head;
         int len = 0;
+        ListNode node = head;
         
         while (node != null) {
-            node = node.next;
             len++;
+            node = node.next;
         }
         
+        if (len == 1 && n == 1)
+            return null;
+        
         int dist = len-n+1;
+        
         if (dist == 1) {
             head = head.next;
             return head;
         }
         
-        int i = 0;
         node = head;
-        
-        while (node != null) {
-            i++;
-            if (i == (dist-1))
-                node.next = node.next.next;
-            
+        dist = dist-1;
+        while (--dist > 0) {
             node = node.next;
         }
+        
+        node.next = node.next.next;
         return head;
     }
 }
