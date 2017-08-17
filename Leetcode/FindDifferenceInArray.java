@@ -1,17 +1,21 @@
-public class FindDifferenceInArray {
+public class Solution {
     public char findTheDifference(String s, String t) {
-        char[] cpS = s.toCharArray();
-        char[] cpT = t.toCharArray();
-        Arrays.sort(cpS);
-        Arrays.sort(cpT);
+        int[] count = new int[26];
         
-        int len = s.length();
-        
-        for (int i = 0; i < len; i++) {
-            if (cpS[i] != cpT[i])
-                return cpT[i];
+        for (int i = 0; i < t.length(); i++) {
+            int val = t.charAt(i) - 'a';
+            count[val]++;
         }
         
-        return cpT[len];
+        for (int i = 0; i < s.length(); i++) {
+            int val = s.charAt(i) - 'a';
+            count[val]--;
+        }
+        
+        for (int i = 0; i < 26; i++)
+            if (count[i] == 1)
+                return (char) ('a' + i);
+        
+        return 0;
     }
 }
