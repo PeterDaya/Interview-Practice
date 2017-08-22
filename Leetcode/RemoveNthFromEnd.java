@@ -6,36 +6,33 @@
  *     ListNode(int x) { val = x; }
  * }
  */
-public class Solution {
+class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         if (head == null)
             return null;
         
+        ListNode temp = head;
         int len = 0;
-        ListNode node = head;
         
-        while (node != null) {
+        while (temp != null) {
             len++;
-            node = node.next;
+            temp = temp.next;
         }
         
-        if (len == 1 && n == 1)
-            return null;
+        int dist = len-n;
         
-        int dist = len-n+1;
-        
-        if (dist == 1) {
+        if (dist == 0) {
             head = head.next;
             return head;
         }
         
-        node = head;
-        dist = dist-1;
-        while (--dist > 0) {
-            node = node.next;
-        }
+        temp = head;
+        while (--dist > 0)
+            temp = temp.next;
         
-        node.next = node.next.next;
+        temp.next = temp.next.next;
+        
         return head;
+        
     }
 }
